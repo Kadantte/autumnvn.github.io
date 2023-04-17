@@ -120,12 +120,13 @@ export async function onRequest(context) {
             if (site) url.searchParams.set('s', site);
             if (title) url.searchParams.set('t', title);
             if (description) url.searchParams.set('d', description);
-            if (image) url.searchParams.set('i', image);
-            if (banner) url.searchParams.set('b', banner);
-            if (video) url.searchParams.set('v', video);
+            if (image && !banner && !video) url.searchParams.set('i', image);
+            if (banner && !image && !video) url.searchParams.set('b', banner);
+            if (video && !image && !banner) url.searchParams.set('v', video);
             if (_url) url.searchParams.set('u', _url);
             if (color) url.searchParams.set('c', color);
             if (!site && !title && !description) return alert('Please fill some fields (the top 3 ones)');
+            if (image && banner || image && video || banner && video) return alert('Please fill only one media field');
             navigator.clipboard.writeText(url.href);
             alert('Copied to clipboard');
         }
