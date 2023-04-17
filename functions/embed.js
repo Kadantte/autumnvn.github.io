@@ -147,7 +147,7 @@ export async function onRequest(context) {
         ${image && !banner && !video ? `<meta property="og:image" content="${image}" />` : ""}
         ${banner && !image && !video ? `<meta property="og:image" content="${banner}" />
         <meta name="twitter:card" content="summary_large_image" />` : ""}
-        ${video && !image && !banner ? `<meta property="og:video" content="${video}" />` : ""}
+        ${video && !image && !banner ? `<meta property="og:video:url" content="${video}" />` : ""}
         ${color ? `<meta name="theme-color" content="${color}" />` : ""}
         <meta property="og:url" content="${_url}" />
 
