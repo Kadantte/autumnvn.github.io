@@ -5,7 +5,6 @@ export async function onRequest(context) {
     const description = url.searchParams.get("description") || url.searchParams.get("desc") || url.searchParams.get("d");
     const image = url.searchParams.get("image") || url.searchParams.get("img") || url.searchParams.get("i");
     const banner = url.searchParams.get("banner") || url.searchParams.get("bigimage") || url.searchParams.get("bigimg") || url.searchParams.get("b");
-    const video = url.searchParams.get("video") || url.searchParams.get("v");
     const _url = url.searchParams.get("url") || url.searchParams.get("link") || url.searchParams.get("u") || url.searchParams.get("l");
     const color = url.searchParams.get("color") || url.searchParams.get("c");
 
@@ -90,10 +89,6 @@ export async function onRequest(context) {
             <td><input type="text" id="banner" /></td>
         </tr>
         <tr>
-            <td>Video</td>
-            <td><input type="text" id="video" /></td>
-        </tr>
-        <tr>
             <td>URL</td>
             <td><input type="text" id="_url" /></td>
         </tr>
@@ -120,13 +115,12 @@ export async function onRequest(context) {
             if (site) url.searchParams.set('s', site);
             if (title) url.searchParams.set('t', title);
             if (description) url.searchParams.set('d', description);
-            if (image && !banner && !video) url.searchParams.set('i', image);
-            if (banner && !image && !video) url.searchParams.set('b', banner);
-            if (video && !image && !banner) url.searchParams.set('v', video);
+            if (image && !banner) url.searchParams.set('i', image);
+            if (banner && !image) url.searchParams.set('b', banner);
             if (_url) url.searchParams.set('u', _url);
             if (color) url.searchParams.set('c', color);
             if (!site && !title && !description) return alert('Please fill some fields (the top 3 ones)');
-            if (image && banner || image && video || banner && video) return alert('Please fill only one media field');
+            if (image && banner) return alert('Please fill only one image field');
             navigator.clipboard.writeText(url.href);
             alert('Copied to clipboard');
         }
@@ -144,14 +138,9 @@ export async function onRequest(context) {
         ${site ? `<meta property="og:site_name" content="${site}" />` : ""}
         ${title ? `<meta property="og:title" content="${title}" />` : ""}
         ${description ? `<meta property="og:description" content="${description}" />` : ""}
-        ${image && !banner && !video ? `<meta property="og:image" content="${image}" />` : ""}
-        ${banner && !image && !video ? `<meta property="og:image" content="${banner}" />
+        ${image && !banner ? `<meta property="og:image" content="${image}" />` : ""}
+        ${banner && !image ? `<meta property="og:image" content="${banner}" />
         <meta name="twitter:card" content="summary_large_image" />` : ""}
-        ${video && !image && !banner ? `<meta property="og:video" content="${video}" />
-        <meta property="og:video:type" content="video/mp4" />
-        <meta property="og:video:width" content="1280" />
-        <meta property="og:video:height" content="720" />
-        ` : ""}
         ${color ? `<meta name="theme-color" content="${color}" />` : ""}
         <meta property="og:url" content="${_url}" />
 
