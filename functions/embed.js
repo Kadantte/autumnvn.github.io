@@ -121,6 +121,8 @@ export async function onRequest(context) {
             if (title) url.searchParams.set('t', title);
             if (description) url.searchParams.set('d', description);
             if (image) url.searchParams.set('i', image);
+            if (banner) url.searchParams.set('b', banner);
+            if (video) url.searchParams.set('v', video);
             if (_url) url.searchParams.set('u', _url);
             if (color) url.searchParams.set('c', color);
             if (!site && !title && !description) return alert('Please fill some fields (the top 3 ones)');
