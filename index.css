@@ -429,7 +429,7 @@ html.scrolled .down-arrow {
 
 .widget-image {
   height: 100%;
-  aspect-ratio: 1.6;
+  aspect-ratio: 1.4;
   overflow: hidden;
   margin-left: 1.5rem;
   border-radius: 10px;
