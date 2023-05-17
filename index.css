@@ -89,7 +89,7 @@
 }
 
 .name-svg {
-  background-color: color-mix(in srgb, var(--name-bio-footer-color) clamp(25%, 350% * var(--scroll-y-percent, 0) + 25%, 95%), transparent);
+  background-color: color-mix(in srgb, var(--name-bio-footer-color) clamp(25%, 350% * var(--scroll-y-percent, 0) + 25%, 35%), transparent);
   backdrop-filter: saturate(2) brightness(2.5) blur(12px);
 }
 
@@ -654,7 +654,7 @@ html.scrolled .down-arrow {
   z-index: -2;
   background-color: #242424;
   --blur: clamp(0px, calc(50px * var(--scroll-y-percent, 0) + -5px), 10px);
-  --brightness: clamp(0.7, calc(-1.5 * var(--scroll-y-percent, 0) + 1.15), 1);
+  --brightness: 0.7;
   filter: blur(var(--blur)) brightness(var(--brightness));
   inset: -30px;
 }
