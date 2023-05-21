@@ -1,5 +1,6 @@
 const TIMEZONE = 'Asia/Ho_Chi_Minh';
 const TIMEZONE_ABBR = 'ICT';
+const visitTime = new Date(new Date().setSeconds(0, 0));
 
 function setScrollValue() {
     document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
@@ -39,12 +40,11 @@ function setClock() {
     const secondText = document.querySelector('.widget-clock-second');
     const timezoneDiffText = document.querySelector('.widget-clock-timezone-diff');
     const timezoneUTCOffsetText = document.querySelector('.widget-clock-timezone-utc-offset');
-
-    secondHand.style.transition = second === 0 ? 'none' : 'transform 0.3s ease';
+    const timePassed = new Date().getTime() - visitTime.getTime();
 
     hourHand.style.transform = `rotate(${hour % 12 / 12 * 360 + minute / 60 * 30 + second / 60 / 60 * 30}deg)`;
     minuteHand.style.transform = `rotate(${minute / 60 * 360 + second / 60 * 6}deg)`;
-    secondHand.style.transform = `rotate(${second / 60 * 360}deg)`;
+    secondHand.style.transform = `rotate(${360 * Math.floor(timePassed / 60 / 1000) + second / 60 * 360}deg)`;
     dateText.innerHTML = new Date(date.getTime() + timezoneDifferent * 60 * 60 * 1000).toLocaleDateString();
     timezoneAbbr.innerHTML = TIMEZONE_ABBR;
     hourText.innerHTML = hour.toString().padStart(2, "0");
@@ -55,7 +55,7 @@ function setClock() {
 }
 
 setClock();
-setInterval(setClock, 1000);
+setInterval(setClock, 500);
 
 function getDayObject() {
     const dayObject = {};
